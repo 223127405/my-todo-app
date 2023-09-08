@@ -1,17 +1,131 @@
 <!DOCTYPE html>
-<html lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue 3 Playground</title>
+  <!-- Include Vue.js from a CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.2.30"></script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #app {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    p {
+      color: #555;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      margin: 5px 0;
+      font-size: 18px;
+      color: #333;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>Welcome to My Page</h1>
+
+    <!-- Conditional Rendering -->
+    <div>
+      <h2>Conditional Rendering</h2>
+      <p v-if="showParagraph">This paragraph is shown using v-if.</p>
+      <p v-else>This paragraph is shown using v-else.</p>
+
+      <p v-show="showParagraph">This paragraph is shown using v-show.</p>
+
+      <ul>
+        <li v-for="item in items" :key="item.id">{{ item.name }}</li>
+      </ul>
+
+      <div v-for="item in itemsWithCondition" :key="item.id">
+        <p v-if="item.isVisible">{{ item.name }} is visible.</p>
+      </div>
+    </div>
+
+    <!-- Form Input Handling -->
+    <div>
+      <h2>Form Input Handling</h2>
+      <input type="text" v-model="message" placeholder="Type something...">
+      <p>You typed: {{ message }}</p>
+      <button @click="clearMessage">Clear</button>
+    </div>
+  </div>
+
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          showParagraph: true,
+          items: [
+            { id: 1, name: 'Phone' },
+            { id: 2, name: 'Laptop' },
+            { id: 3, name: 'Charger' },
+          ],
+          itemsWithCondition: [
+            { id: 1, name: 'Item A', isVisible: true },
+            { id: 2, name: 'Item B', isVisible: false },
+            { id: 3, name: 'Item C', isVisible: true },
+          ],
+          message: '',
+        };
+      },
+      methods: {
+        clearMessage() {
+          this.message = '';
+        },
+      },
+    });
+
+    app.mount('#app');
+  </script>
+</body>
 </html>
